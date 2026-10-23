@@ -9,6 +9,8 @@ anyone can browse the public marketplace.
 Built with **ASP.NET Core 8 (MVC)**, **EF Core** and **ASP.NET Core Identity**
 for role-based authentication (`Farmer` / `Employee`).
 
+**Project page:** https://mrpettitt.github.io/AgriEnergyConnect/
+
 ## Screenshots
 
 | | |
