@@ -1,0 +1,77 @@
+@page
+@model AgriEnergyConnect.Areas.Identity.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="ae-page-header">
+    <div>
+        <div class="ae-eyebrow">Welcome back</div>
+        <h1 class="h3">Log in</h1>
+        <p class="text-muted mb-0">Sign in with the email and password your employee gave you.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="ae-card ae-form-card">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="validation-summary-errors" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="name@example.com" />
+                    <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" placeholder="Password" />
+                    <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                    <label asp-for="Input.RememberMe" class="form-check-label"></label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3">Log in</button>
+            </form>
+        </div>
+    </div>
+
+@if (Model.ShowDemoLogins)
+{
+    <div class="col-md-6">
+        <div class="ae-credentials p-4 h-100">
+            <h2 class="h6 text-uppercase text-muted mb-3" style="letter-spacing:.05em;">Try the demo</h2>
+            <p class="text-muted small">These fill in the form for you. You still click "Log in" to see the result.</p>
+
+            <div class="d-flex flex-column gap-2">
+                <button type="button" class="btn btn-outline-primary text-start" onclick="aeFillLogin('john.smith@demo.com', 'Employee123!')">
+                    <i class="bi bi-people me-1"></i>Employee login (success)
+                </button>
+                <button type="button" class="btn btn-outline-primary text-start" onclick="aeFillLogin('john.doe@demo.com', 'Farmer123!')">
+                    <i class="bi bi-tree me-1"></i>Farmer login (success)
+                </button>
+                <button type="button" class="btn btn-outline-danger text-start" onclick="aeFillLogin('john.doe@demo.com', 'WrongPassword1!')">
+                    <i class="bi bi-x-circle me-1"></i>Wrong password (failure)
+                </button>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    @if (Model.ShowDemoLogins)
+    {
+        <script>
+        function aeFillLogin(email, password) {
+            document.getElementById('Input_Email').value = email;
+            document.getElementById('Input_Password').value = password;
+        }
+        </script>
+    }
+}

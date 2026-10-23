@@ -1,0 +1,560 @@
+/* ==========================================================================
+   Agri-Energy Connect - design tokens & site-wide styles
+   ========================================================================== */
+
+:root {
+  --color-primary: #1f6f4a;
+  --color-primary-dark: #144e34;
+  --color-primary-light: #e7f3ec;
+  --color-accent: #e3a234;
+  --color-accent-dark: #c6842a;
+  --color-ink: #1c2620;
+  --color-muted: #5b6b62;
+  --color-surface: #ffffff;
+  --color-bg: #f6f8f5;
+  --color-border: #e1e7e0;
+  --color-danger: #c0392b;
+  --color-danger-light: #fbeae8;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(20, 40, 28, 0.06);
+  --shadow-md: 0 10px 30px rgba(20, 40, 28, 0.08);
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.text-muted {
+  color: var(--color-muted) !important;
+}
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+
+.ae-navbar {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.ae-navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--color-ink);
+}
+
+.ae-navbar .navbar-brand .brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.ae-navbar .nav-link {
+  font-weight: 600;
+  color: var(--color-muted) !important;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: var(--radius-sm);
+}
+
+.ae-navbar .nav-link.active,
+.ae-navbar .nav-link:hover {
+  color: var(--color-primary) !important;
+  background-color: var(--color-primary-light);
+}
+
+.ae-navbar .btn-link.nav-link {
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.1rem;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #33240a;
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: #33240a;
+}
+
+.btn:focus, .btn:active:focus, .form-control:focus, .form-select:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(31, 111, 74, 0.2);
+}
+
+/* ==========================================================================
+   Layout helpers
+   ========================================================================== */
+
+.ae-page {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.ae-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.ae-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.ae-page-header h1 {
+  margin-bottom: 0.25rem;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.ae-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.75rem;
+}
+
+.ae-action-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ae-action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.ae-action-card .ae-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 1.3rem;
+}
+
+.ae-stat-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ae-stat-card .ae-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.ae-stat-card .ae-stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ae-stat-card .ae-stat-label {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Hero (home page)
+   ========================================================================== */
+
+.ae-hero {
+  background: linear-gradient(160deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #2d8a5c 100%);
+  border-radius: var(--radius-lg);
+  color: #fff;
+  padding: 3.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ae-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 85% 20%, rgba(227, 162, 52, 0.35), transparent 45%);
+  pointer-events: none;
+}
+
+.ae-hero .ae-eyebrow {
+  color: #cdeedb;
+}
+
+.ae-hero h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  max-width: 34rem;
+}
+
+.ae-hero p.lead {
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 36rem;
+}
+
+.ae-hero .btn-accent {
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Feature list (home page)
+   ========================================================================== */
+
+.ae-feature {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.ae-feature .ae-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Credentials panel (home page)
+   ========================================================================== */
+
+.ae-credentials {
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.ae-credentials table {
+  margin-bottom: 0;
+}
+
+.ae-credentials code {
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+.ae-form-card {
+  max-width: 34rem;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.form-control, .form-select {
+  border-radius: var(--radius-sm);
+  border-color: var(--color-border);
+  padding: 0.55rem 0.75rem;
+}
+
+.text-danger {
+  color: var(--color-danger) !important;
+}
+
+.validation-summary-errors {
+  background-color: var(--color-danger-light);
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.validation-summary-errors ul {
+  margin-bottom: 0;
+  padding-left: 1.1rem;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+.ae-table-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 700;
+  padding: 0.9rem 1.25rem;
+  background-color: #fafbf9;
+}
+
+.table tbody td {
+  padding: 0.9rem 1.25rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ae-category-badge {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.ae-category-badge.category-fruit {
+  background-color: #fdeee0;
+  color: #a35216;
+}
+
+.ae-empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--color-muted);
+}
+
+.ae-empty-state .ae-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Marketplace
+   ========================================================================== */
+
+.ae-product-card-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+}
+
+.ae-product-card-link:hover {
+  color: inherit;
+}
+
+.ae-product-card {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.ae-product-card-link:hover .ae-product-card {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.ae-price-tag {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.ae-price-tag-lg {
+  font-size: 1.4rem;
+  padding: 0.4rem 0.9rem;
+}
+
+/* ==========================================================================
+   Filter bar (Employee > View Products, Marketplace)
+   ========================================================================== */
+
+.ae-filter-bar {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   Alerts
+   ========================================================================== */
+
+.alert {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-color: rgba(31, 111, 74, 0.2);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.ae-footer {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-muted);
+  padding: 1.25rem 0;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Responsive tweaks
+   ========================================================================== */
+
+@media (max-width: 767.98px) {
+  .ae-hero {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .ae-hero h1 {
+    font-size: 2rem;
+  }
+
+  .ae-page-header {
+    align-items: flex-start;
+  }
+}
+
+.ae-navbar .nav-link,
+.ae-navbar .btn-link {
+  white-space: nowrap;
+}

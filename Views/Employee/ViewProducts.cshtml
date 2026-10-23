@@ -1,0 +1,95 @@
+@model ProductFilterViewModel
+@{
+    ViewData["Title"] = "Browse Produce";
+}
+
+<div class="ae-page-header">
+    <div>
+        <div class="ae-eyebrow">Employee Dashboard</div>
+        <h1 class="h3">Browse Produce</h1>
+        <p class="text-muted mb-0">Filter listings by farmer, category, or production date.</p>
+    </div>
+</div>
+
+<div class="ae-filter-bar">
+    <form asp-action="ViewProducts" method="get" class="row gy-3 gx-3 align-items-end">
+        <div class="col-md-3">
+            <label for="farmerId" class="form-label">Farmer</label>
+            <select id="farmerId" name="farmerId" class="form-select" asp-items="Model.Farmers">
+                <option value="">All farmers</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select">
+                <option value="">All categories</option>
+                @foreach (var category in ProductOptions.Categories)
+                {
+                    <option value="@category" selected="@(category == Model.Category)">@category</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="startDate" class="form-label">From</label>
+            <input id="startDate" name="startDate" type="date" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-md-2">
+            <label for="endDate" class="form-label">To</label>
+            <input id="endDate" name="endDate" type="date" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-grow-1">
+                <i class="bi bi-search me-1"></i>Search
+            </button>
+            <a asp-action="ViewProducts" class="btn btn-outline-primary">Clear</a>
+        </div>
+    </form>
+</div>
+
+@if (Model.Results.TotalCount == 0)
+{
+    <div class="ae-table-card">
+        <div class="ae-empty-state">
+            <div class="ae-icon"><i class="bi bi-slash-circle"></i></div>
+            <h2 class="h5">No matching products</h2>
+            <p class="mb-0">Try widening the date range or clearing a filter.</p>
+        </div>
+    </div>
+}
+else
+{
+    <p class="text-muted small mb-2">@Model.Results.TotalCount listing(s) found</p>
+    <div class="ae-table-card">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Farmer</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Production Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.Results.Items)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@product.ProductName</td>
+                            <td>@product.Farmer?.FullName</td>
+                            <td>
+                                <span class="ae-category-badge @(product.ProductCategory == "Fruit" ? "category-fruit" : "")">
+                                    @product.ProductCategory
+                                </span>
+                            </td>
+                            <td>@product.Price.ToString("C") <span class="text-muted small">per @product.Unit</span></td>
+                            <td>@product.ProductionDate.ToString("d MMM yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <partial name="_Pager" model="(Model.Results.Page, Model.Results.TotalPages)" />
+}

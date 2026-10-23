@@ -1,0 +1,60 @@
+@model FarmerRegistrationViewModel
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+<div class="ae-page-header">
+    <div>
+        <div class="ae-eyebrow">Employee Dashboard</div>
+        <h1 class="h3">Add a Farmer</h1>
+        <p class="text-muted mb-0">This creates the farmer's login and profile in one step.</p>
+    </div>
+</div>
+
+<div class="ae-card ae-form-card">
+    <form asp-action="AddFarmer" method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label"></label>
+            <input asp-for="FullName" class="form-control" placeholder="e.g. Jane Smith" autofocus />
+            <span asp-validation-for="FullName" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" placeholder="jane.smith@example.com" />
+            <span asp-validation-for="Email" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ContactNumber" class="form-label"></label>
+            <input asp-for="ContactNumber" class="form-control" placeholder="e.g. 082 123 4567" />
+            <span asp-validation-for="ContactNumber" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <input asp-for="Address" class="form-control" placeholder="Farm address" />
+            <span asp-validation-for="Address" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-control" type="password" placeholder="Temporary password" />
+            <span asp-validation-for="Password" class="text-danger small"></span>
+            <div class="form-text">The farmer can change this after signing in.</div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg me-1"></i>Add Farmer
+            </button>
+            <a asp-controller="Employee" asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

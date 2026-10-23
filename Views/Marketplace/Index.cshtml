@@ -1,0 +1,77 @@
+@model MarketplaceViewModel
+@{
+    ViewData["Title"] = "Marketplace";
+}
+
+<div class="ae-page-header">
+    <div>
+        <div class="ae-eyebrow">Marketplace</div>
+        <h1 class="h3">Fresh from local farmers</h1>
+        <p class="text-muted mb-0">Browse everything currently listed. No account needed.</p>
+    </div>
+</div>
+
+<div class="ae-filter-bar">
+    <form method="get" asp-action="Index" class="row gy-3 gx-3 align-items-end">
+        <div class="col-md-6">
+            <label for="search" class="form-label">Search</label>
+            <input id="search" name="search" class="form-control" placeholder="e.g. Tomato" value="@Model.Search" />
+        </div>
+        <div class="col-md-4">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select">
+                <option value="">All Categories</option>
+                @foreach (var cat in Model.Categories)
+                {
+                    <option value="@cat" selected="@(cat == Model.Category)">@cat</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-search me-1"></i>Search
+            </button>
+        </div>
+    </form>
+</div>
+
+@if (Model.Results.TotalCount == 0)
+{
+    <div class="ae-table-card">
+        <div class="ae-empty-state">
+            <div class="ae-icon"><i class="bi bi-slash-circle"></i></div>
+            <h2 class="h5">No listings match your search</h2>
+            <p class="mb-3">Try a different search term or clear the category filter.</p>
+            <a asp-action="Index" class="btn btn-outline-primary">Clear filters</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        @foreach (var product in Model.Results.Items)
+        {
+            <div class="col">
+                <a asp-action="Details" asp-route-id="@product.ProductId" class="ae-product-card-link">
+                    <div class="ae-card ae-product-card h-100">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="ae-category-badge @(product.ProductCategory == "Fruit" ? "category-fruit" : "")">
+                                @product.ProductCategory
+                            </span>
+                            <span class="ae-price-tag">@product.Price.ToString("C")<span class="small"> / @product.Unit</span></span>
+                        </div>
+                        <h2 class="h5 mb-1">@product.ProductName</h2>
+                        <p class="text-muted small mb-3">
+                            <i class="bi bi-geo-alt me-1"></i>@product.Farmer?.FullName
+                        </p>
+                        <p class="text-muted small mb-0 mt-auto">
+                            <i class="bi bi-calendar3 me-1"></i>Produced @product.ProductionDate.ToString("d MMM yyyy")
+                        </p>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+    <partial name="_Pager" model="(Model.Results.Page, Model.Results.TotalPages)" />
+}

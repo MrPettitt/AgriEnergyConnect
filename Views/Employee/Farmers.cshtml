@@ -1,0 +1,70 @@
+@model PagedResult<FarmerListItem>
+@{
+    ViewData["Title"] = "Farmers";
+}
+
+<div class="ae-page-header">
+    <div>
+        <div class="ae-eyebrow">Employee Dashboard</div>
+        <h1 class="h3">Farmers</h1>
+        <p class="text-muted mb-0">Everyone who can log produce on the platform.</p>
+    </div>
+    <a asp-action="AddFarmer" class="btn btn-primary">
+        <i class="bi bi-person-plus me-1"></i>Add Farmer
+    </a>
+</div>
+
+@if (Model.TotalCount == 0)
+{
+    <div class="ae-table-card">
+        <div class="ae-empty-state">
+            <div class="ae-icon"><i class="bi bi-people"></i></div>
+            <h2 class="h5">No farmers yet</h2>
+            <p class="mb-3">Add the first farmer to get started.</p>
+            <a asp-action="AddFarmer" class="btn btn-primary">Add Farmer</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="ae-table-card">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Listings</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var farmer in Model.Items)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@farmer.FullName</td>
+                            <td>@farmer.Email</td>
+                            <td>@farmer.ContactNumber</td>
+                            <td>@farmer.Address</td>
+                            <td>
+                                <a asp-action="ViewProducts" asp-route-farmerId="@farmer.FarmerId">@farmer.ProductCount</a>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <form asp-action="DeleteFarmer" asp-route-id="@farmer.FarmerId" method="post" class="d-inline"
+                                      data-confirm="Remove @farmer.FullName and all of their listings? This cannot be undone.">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash me-1"></i>Remove
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <partial name="_Pager" model="(Model.Page, Model.TotalPages)" />
+}

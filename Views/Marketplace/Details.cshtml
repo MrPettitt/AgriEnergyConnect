@@ -1,0 +1,57 @@
+@model ProductDetailsViewModel
+@{
+    var product = Model.Product;
+    ViewData["Title"] = product.ProductName;
+    var moreFromFarmer = Model.MoreFromFarmer;
+}
+
+<a asp-action="Index" class="text-muted small d-inline-block mb-3">
+    <i class="bi bi-arrow-left me-1"></i>Back to Marketplace
+</a>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="ae-card">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="ae-category-badge @(product.ProductCategory == "Fruit" ? "category-fruit" : "")">
+                    @product.ProductCategory
+                </span>
+                <span class="ae-price-tag ae-price-tag-lg">@product.Price.ToString("C")<span class="small"> / @product.Unit</span></span>
+            </div>
+            <h1 class="h3">@product.ProductName</h1>
+            <p class="text-muted mb-4">
+                <i class="bi bi-calendar3 me-1"></i>Produced @product.ProductionDate.ToString("d MMMM yyyy")
+            </p>
+
+            <hr />
+
+            <h2 class="h6 text-uppercase text-muted" style="letter-spacing:.05em;">Grown by</h2>
+            <p class="mb-1 fw-semibold">@product.Farmer?.FullName</p>
+            <p class="text-muted mb-0"><i class="bi bi-geo-alt me-1"></i>@product.Farmer?.Address</p>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="ae-card h-100">
+            <h2 class="h6 text-uppercase text-muted mb-3" style="letter-spacing:.05em;">More from @product.Farmer?.FullName</h2>
+            @if (!moreFromFarmer.Any())
+            {
+                <p class="text-muted small mb-0">No other listings from this farmer right now.</p>
+            }
+            else
+            {
+                <div class="d-flex flex-column gap-2">
+                    @foreach (var other in moreFromFarmer)
+                    {
+                        <a asp-action="Details" asp-route-id="@other.ProductId" class="ae-product-card-link">
+                            <div class="d-flex justify-content-between align-items-center border rounded p-2">
+                                <span>@other.ProductName</span>
+                                <span class="ae-price-tag">@other.Price.ToString("C")</span>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

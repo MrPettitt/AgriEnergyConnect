@@ -1,0 +1,29 @@
+@model (int Page, int TotalPages)
+@{
+    // Rebuilds the current query string so filters survive page changes.
+    string Link(int page)
+    {
+        var query = Context.Request.Query
+            .Where(q => !string.Equals(q.Key, "page", StringComparison.OrdinalIgnoreCase))
+            .SelectMany(q => q.Value.Select(v => $"{Uri.EscapeDataString(q.Key)}={Uri.EscapeDataString(v ?? string.Empty)}"))
+            .Append($"page={page}");
+        return $"{Context.Request.Path}?{string.Join("&", query)}";
+    }
+}
+
+@if (Model.TotalPages > 1)
+{
+    <nav aria-label="Pagination" class="mt-4">
+        <ul class="pagination justify-content-center mb-0">
+            <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                <a class="page-link" href="@Link(Model.Page - 1)">Previous</a>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">Page @Model.Page of @Model.TotalPages</span>
+            </li>
+            <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Link(Model.Page + 1)">Next</a>
+            </li>
+        </ul>
+    </nav>
+}

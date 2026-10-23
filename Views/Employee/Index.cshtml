@@ -1,0 +1,72 @@
+@model EmployeeDashboardViewModel
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<div class="ae-page-header">
+    <div>
+        <div class="ae-eyebrow">Employee Dashboard</div>
+        <h1 class="h3">Welcome back</h1>
+        <p class="text-muted mb-0">Onboard farmers and keep an eye on what is coming in.</p>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6">
+        <div class="ae-stat-card">
+            <span class="ae-icon"><i class="bi bi-people"></i></span>
+            <div>
+                <div class="ae-stat-value">@Model.FarmerCount</div>
+                <div class="ae-stat-label">Registered Farmers</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="ae-stat-card">
+            <span class="ae-icon"><i class="bi bi-basket"></i></span>
+            <div>
+                <div class="ae-stat-value">@Model.ProductCount</div>
+                <div class="ae-stat-label">Products Logged</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="ae-card ae-action-card">
+            <div class="ae-icon"><i class="bi bi-person-plus"></i></div>
+            <div>
+                <h2 class="h5">Add a Farmer</h2>
+                <p class="text-muted mb-0">Create an account and profile for a new farmer.</p>
+            </div>
+            <a asp-controller="Employee" asp-action="AddFarmer" class="btn btn-primary align-self-start mt-auto">
+                <i class="bi bi-plus-lg me-1"></i>Add Farmer
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ae-card ae-action-card">
+            <div class="ae-icon"><i class="bi bi-card-list"></i></div>
+            <div>
+                <h2 class="h5">Manage Farmers</h2>
+                <p class="text-muted mb-0">See every farmer, their listings, and remove accounts.</p>
+            </div>
+            <a asp-controller="Employee" asp-action="Farmers" class="btn btn-primary align-self-start mt-auto">
+                <i class="bi bi-people me-1"></i>View Farmers
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ae-card ae-action-card">
+            <div class="ae-icon"><i class="bi bi-funnel"></i></div>
+            <div>
+                <h2 class="h5">Browse Produce</h2>
+                <p class="text-muted mb-0">Filter any farmer's listings by category or date range.</p>
+            </div>
+            <a asp-controller="Employee" asp-action="ViewProducts" class="btn btn-primary align-self-start mt-auto">
+                <i class="bi bi-search me-1"></i>View Products
+            </a>
+        </div>
+    </div>
+</div>

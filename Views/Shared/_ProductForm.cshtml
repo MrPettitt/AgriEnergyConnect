@@ -1,0 +1,48 @@
+@model ProductFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
+<div class="mb-3">
+    <label asp-for="ProductName" class="form-label"></label>
+    <input asp-for="ProductName" class="form-control" placeholder="e.g. Tomatoes" autofocus />
+    <span asp-validation-for="ProductName" class="text-danger small"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="ProductCategory" class="form-label"></label>
+    <select asp-for="ProductCategory" class="form-select">
+        <option value="">Select a category&hellip;</option>
+        @foreach (var category in ProductOptions.Categories)
+        {
+            <option value="@category" selected="@(category == Model.ProductCategory)">@category</option>
+        }
+    </select>
+    <span asp-validation-for="ProductCategory" class="text-danger small"></span>
+</div>
+
+<div class="row g-3 mb-3">
+    <div class="col-sm-7">
+        <label asp-for="Price" class="form-label"></label>
+        <div class="input-group">
+            <span class="input-group-text">@System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol</span>
+            <input asp-for="Price" type="number" class="form-control" placeholder="0.00" step="0.01" min="0.01" />
+        </div>
+        <span asp-validation-for="Price" class="text-danger small"></span>
+    </div>
+    <div class="col-sm-5">
+        <label asp-for="Unit" class="form-label"></label>
+        <select asp-for="Unit" class="form-select">
+            @foreach (var unit in ProductOptions.Units)
+            {
+                <option value="@unit" selected="@(unit == Model.Unit)">@unit</option>
+            }
+        </select>
+        <span asp-validation-for="Unit" class="text-danger small"></span>
+    </div>
+</div>
+
+<div class="mb-4">
+    <label asp-for="ProductionDate" class="form-label"></label>
+    <input asp-for="ProductionDate" type="date" class="form-control" max="@DateTime.Today.ToString("yyyy-MM-dd")" value="@Model.ProductionDate.ToString("yyyy-MM-dd")" />
+    <span asp-validation-for="ProductionDate" class="text-danger small"></span>
+</div>

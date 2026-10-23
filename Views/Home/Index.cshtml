@@ -1,0 +1,118 @@
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "Home";
+    var showDemo = Configuration.GetValue<bool>("Seed:DemoData");
+}
+
+<section class="ae-hero mb-5">
+    <div class="ae-eyebrow">Farmer &amp; Employee Portal</div>
+    <h1>Connecting farmers with the people who bring their produce to market.</h1>
+    <p class="lead">
+        Browse what local farmers are growing right now, no account needed,
+        or sign in to manage listings and farmer accounts.
+    </p>
+    <div class="d-flex flex-wrap gap-2 mt-2">
+        <a asp-controller="Marketplace" asp-action="Index" class="btn btn-accent btn-lg">
+            <i class="bi bi-basket me-1"></i>Browse the Marketplace
+        </a>
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+        </a>
+    </div>
+</section>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="ae-card ae-action-card">
+            <div class="ae-icon"><i class="bi bi-basket"></i></div>
+            <h2 class="h5 mb-0">For Everyone</h2>
+            <p class="text-muted mb-0">
+                Browse the marketplace to see what is currently listed, by every farmer,
+                with prices and production dates. No sign-in required.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ae-card ae-action-card">
+            <div class="ae-icon"><i class="bi bi-tree"></i></div>
+            <h2 class="h5 mb-0">For Farmers</h2>
+            <p class="text-muted mb-0">
+                Log in to record new produce as it is ready (product name, category, price
+                and production date) and keep track of everything you've listed so far.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ae-card ae-action-card">
+            <div class="ae-icon"><i class="bi bi-people"></i></div>
+            <h2 class="h5 mb-0">For Employees</h2>
+            <p class="text-muted mb-0">
+                Onboard new farmers with a few details, then browse and filter produce
+                across every farmer by date range or category.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 align-items-start mb-4">
+    <div class="col-lg-7">
+        <h2 class="h4 mb-3">How it works</h2>
+        <div class="d-flex flex-column gap-3">
+            <div class="ae-feature">
+                <span class="ae-icon"><i class="bi bi-person-plus"></i></span>
+                <div>
+                    <strong>Employees add farmers.</strong>
+                    <p class="text-muted mb-0">A quick form creates the farmer's account and profile in one step.</p>
+                </div>
+            </div>
+            <div class="ae-feature">
+                <span class="ae-icon"><i class="bi bi-basket"></i></span>
+                <div>
+                    <strong>Farmers log their produce.</strong>
+                    <p class="text-muted mb-0">Each listing captures what was grown, its category, and when it was produced.</p>
+                </div>
+            </div>
+            <div class="ae-feature">
+                <span class="ae-icon"><i class="bi bi-funnel"></i></span>
+                <div>
+                    <strong>Employees browse and filter.</strong>
+                    <p class="text-muted mb-0">Search any farmer's listings by category or production date range.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@if (showDemo)
+{
+    <div class="col-lg-5">
+        <div class="ae-credentials p-4">
+            <h2 class="h6 text-uppercase text-muted mb-3" style="letter-spacing:.05em;">Try the demo</h2>
+            <p class="text-muted small">The database is seeded automatically on first run. Sign in with either account below:</p>
+            <div class="table-responsive">
+            <table class="table table-sm small mb-2">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Employee</td>
+                        <td><code>john.smith@demo.com</code></td>
+                        <td><code>Employee123!</code></td>
+                    </tr>
+                    <tr>
+                        <td>Farmer</td>
+                        <td><code>john.doe@demo.com</code></td>
+                        <td><code>Farmer123!</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <p class="text-muted small mb-0">More demo accounts are listed in the project README.</p>
+        </div>
+    </div>
+}
+</div>
